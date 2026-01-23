@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+  <body>
+    <h3>IMPORTAR BITACORAS</h3>
+
+    <label>Nombre del Excel</label><br />
+    <input
+      type="text"
+      id="excel"
+      style="width: 100%"
+      value="Nombre del archivo.xlsx"
+    /><br /><br />
+
+    <label>Hoja origen</label><br />
+    <input type="text" id="hojaOrigen" value="Nombre de la hoja" /><br /><br />
+
+    <label>Hoja destino</label><br />
+    <input type="text" id="hojaDestino" value="Hoja destino" /><br /><br />
+
+    <label>Fila inicio origen</label><br />
+    <input
+      type="number"
+      id="filaOrigen"
+      value="Fila inicio origen"
+    /><br /><br />
+
+    <label>Fila inicio destino</label><br />
+    <input
+      type="number"
+      id="filaDestino"
+      value="Filia inicio destino"
+    /><br /><br />
+
+    <button onclick="importar()">Importar</button>
+
+    <script>
+      function importar() {
+        google.script.run
+          .withSuccessHandler(() => alert("Importación completada"))
+          .withFailureHandler((err) => alert("Error: " + err.message))
+          .importarBitacora(
+            document.getElementById("excel").value,
+            document.getElementById("hojaOrigen").value,
+            document.getElementById("hojaDestino").value,
+            Number(document.getElementById("filaOrigen").value),
+            Number(document.getElementById("filaDestino").value),
+          );
+      }
+    </script>
+  </body>
+</html>
